@@ -1,0 +1,1825 @@
+<!doctype html>
+<html lang="ca">
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Menorca Smart</title>
+
+        <script type="text/javascript" src="library/jquery-1.10/jquery-1.10.1.min.js"></script>
+        <script src="library/jquery-mobile/jquery.mobile-1.3.2.min.js"></script>
+
+        <!-- PHOTOSWIPE -->
+        <script src="library/jquery/photoswipe/lib/klass.min.js"></script>
+        <script src="library/jquery/photoswipe/code.photoswipe.jquery-3.0.5.min.js"></script>
+        <link rel="stylesheet" href="library/jquery/photoswipe/photoswipe.css" type="text/css">
+
+        <!-- PHONEGAP -->
+        <script src="phonegap.js"></script>
+        
+        <!-- PLUGIN -->
+        <script type="text/javascript" charset="utf-8" src="js/imageresize.js"></script>
+        
+
+        <script type="text/javascript" src="library/OpenLayers-2.13.1/OpenLayers.mobile.js"></script>
+        <link rel="stylesheet" href="library/OpenLayers-2.13.1/theme/default/style.mobile.css" type="text/css">
+        <!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js#startOpened=true"></script> -->
+
+        <script type="text/javascript" src="library/proj4js/proj4js-combined.js"></script>
+
+        <link rel="stylesheet" href="css/municipal2/municipal.css" />
+
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.3.2.min.css" />
+        <link rel="stylesheet" href="css/reneix/style.css">
+
+        <!--<script type="text/javascript" src="js/combined.js.h1409060318.pack" charset="utf-8"></script>-->
+
+        <!-- Librerias Sitmun -->
+		<script type="text/javascript" src="sitmun/sitmun.js"></script>
+        <script type="text/javascript" src="js/styles.js"></script>
+        <script type="text/javascript" src="js/mapa.js"></script>
+        <script type="text/javascript" src="js/phonegap/location.js"></script>
+        <script type="text/javascript" src="js/phonegap/network.js"></script>
+        <script type="text/javascript" src="js/phonegap/soap.js"></script>
+        <script type="text/javascript" src="js/phonegap/json.js"></script>
+        <script type="text/javascript" src="js/phonegap/camara.js"></script>
+        <script type="text/javascript" src="js/phonegap/fastclick.js"></script>
+        <script type="text/javascript" src="js/visor.js"></script>
+        <script type="text/javascript" src="js/idioma.js"></script>
+        <script type="text/javascript" src="js/municipi.js"></script>
+        <script type="text/javascript" src="js/layers.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+
+        <script src="js/reneix.js" type="text/javascript"></script>
+        
+                
+
+    </head>
+    <body onload="main()">
+        <!-- pageSplash -->
+        <div id="pageSplash" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+                <h1>Menorca Smart</h1>
+                <a href="credits.html" class="ui-btn-right" data-icon="info" data-iconpos="notext" data-rel="dialog" data-transition="fade">Cr&egrave;dits</a>
+            </div>
+            <div data-role="content" role="main" style="padding: 0px;">
+                <center>
+   	                <img id="imgLogoIni" src='img/logoMobil.png' style="visibility: hidden;">
+                    <h3><div id="splash_lbl1" style="width:100%;top:50px;">Benvinguts a Menorca</div></h3>
+                    <h4><div id="splash_lbl2" style="width:100%;top:70px;">La informaci&oacute; de Menorca a la teva butxaca</div></h4>
+                    <div id="lblInfo0" style="color: #666666;" >
+                        Estat...
+                    </div>
+                    <p>
+                        &nbsp;
+                    </p>
+                </center>
+                
+                <div id="menuSplash" style="position:absolute;bottom:60px;width:100%;padding:0px;">
+                	<table border=0 width=100% cellspacing=0 cellpadding=0>
+                	<tr><td>
+		                <div id="PeuTur" onclick='$.mobile.changePage($("#pageTurisme1"));' style="width:100%;padding:0px;">
+		                	<img src='img/fons/turisme.jpg' style="max-width:100%;">
+		                	<div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;bottom:17px;left:20px;" id="splash_peu_1">Infomraci&oacute; tur&iacute;stica</div>
+		                	<div id="hand2" style="position:absolute;bottom:15px;right:10px;"><img src='img/icones/hand.png' style="max-width:50px;" ></div>
+		                </div>            
+                	</td></tr>
+                	<tr><td>
+
+		                <div id="PeuAdmin" onclick="goAdmin()" style="width:100%;padding:0px;">
+		                	<img id="imgAdmin" src='img/fons/administracio.jpg' style="max-width:100%;">
+		                	<div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;bottom:20px;left:20px;" id="splash_peu_2">Informaci&oacute; dels ajuntaments i Consell</div>
+		                	<div style="position:absolute;bottom:15px;right:10px;"><img src='img/icones/hand.png' style="max-width:50px;" ></div>
+		                </div>   
+
+                	
+                	</td></tr>
+                	</table>
+                
+                </div>
+                
+				
+            </div>
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b" style="padding:0px;">
+                <div data-role="navbar" data-theme="b" >
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" data-icon="idioma-cat" id="tabIdioma0a"  href="#pageIdioma" data-rel="dialog" data-transition="fade"><div id="splash_lblIdioma" >Idioma</div></a>
+                        </li>
+                        <!--
+                        <li>
+                            <a class="footerMenuItem" id="tabExit1a"  data-icon="back" data-iconpos="top"><div id="splash_lblIdioma2" >Sortir</div></a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        
+        <!--
+            PAGE MUNICIPI
+        -->
+        <div id="pageMainMunicipi" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageSplash" data-role="button" data-icon="arrow-l"><div id="muni_lblInici">Inici</div></a>
+                <h1><div id="muni_lblTitol">Entitas Locals</div></h1>
+                <!--<a href="credits.html" class="ui-btn-right" data-icon="info" data-iconpos="notext" data-rel="dialog" data-transition="fade">Cr&egrave;dits</a>-->
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+                <img id="imgLogoMuni" src='img/logo.png'>
+                <center><div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;" id="lbl_Muni_0" onclick="preparaMenu(currentMunicipi);"><h1>Benvingut a Menorca.</h1></div></center>
+                <div style="position:absolute;top:95px;right:10px;"><img src='img/icones/hand.png' style="max-width:50px;" onclick="preparaMenu(currentMunicipi);"></div>
+                
+                <div style="padding:12px;">
+                    <!--<div id="divBotoMuniPral"><a href="#"  data-role="button" data-theme="c" id="btnGoHome">Informaci&oacute; municipal</a></div>-->
+                    <div id="lblMunicipi" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Pots seleccionar informaci&oacute; d&apos;una d&apos;aquestes entitats:<br>&nbsp;</div>
+                    	<div data-role="controlgroup" style="padding:5px;">
+                            <ul id="llistaMainMunicipis" data-role="listview" data-theme="c">
+                                <li key="07002" ><a href=""><img src='img/fons/07002_li.jpg'/><h3>Alaior</h3></a></li>
+                                <li key="07015" ><a href=""><img src='img/fons/07015_li.jpg'/><h3>Ciutadella</h3></a></li>
+                                <li key="07023" ><a href=""><img src='img/fons/07023_li.jpg'/><h3>Ferreries</h3></a></li>
+                                <li key="07032" ><a href=""><img src='img/fons/07032_li.jpg'/><h3>Ma&oacute;</h3></a></li>
+                                <li key="07037" ><a href=""><img src='img/fons/07037_li.jpg'/><h3>Es Mercadal</h3></a></li>
+                                <li key="07052" ><a href=""><img src='img/fons/07052_li.jpg'/><h3>Sant Llu&iacute;s</h3></a></li>
+                                <li key="07064" ><a href=""><img src='img/fons/07064_li.jpg'/><h3>Es Castell</h3></a></li>
+                                <li key="07902" ><a href=""><img src='img/fons/07067_li.jpg'/><h3>Es Migjorn Gran</h3></a></li>
+                                <li key="07070" ><a href=""><img src='img/fons/07070_li.jpg'/><h3>Consell Insular</h3></a></li>
+                            </ul>
+                    	</div>
+                    
+                    <!--<a href=""  data-role="button" data-theme="b" id="btnAcceptarMunicipi">Aceptar</a>-->
+                </div>  
+            </div><!-- /content -->
+            
+        </div>        
+
+
+        
+        <!--
+            PAGE MUNICIPI2
+        -->
+        <div id="pageMainMunicipi2" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageSplash" data-role="button" data-icon="arrow-l"><div id="muni2_lblInici">Inici</div></a>
+                <h1><div id="muni2_lblTitol">Entitas Locals</div></h1>
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+                <img id="imgLogoMuni2" src='img/logo.png'>
+                <center><div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:30px;right:10px;" id="lbl_Muni2_0"><h2>Benvingut a Menorca</h2></div></center>
+
+
+                <div style="padding:10px;">
+                    <div id="lblMunicipi2"><hr>Pots seleccionar informaci&oacute; d&apos;un d&apos;aquests municipis:<p></p></div>
+                    	<div data-role="controlgroup" style="padding:5px;">
+                            <ul id="llistaMainMunicipis2" data-role="listview" data-theme="c">
+                                <li key="07002" ><a href=""><img src='img/fons/07002_li.jpg'/><h3>Alaior</h3></a></li>
+                                <li key="07015" ><a href=""><img src='img/fons/07015_li.jpg'/><h3>Ciutadella</h3></a></li>
+                                <li key="07023" ><a href=""><img src='img/fons/07023_li.jpg'/><h3>Ferreries</h3></a></li>
+                                <li key="07032" ><a href=""><img src='img/fons/07032_li.jpg'/><h3>Ma&oacute;</h3></a></li>
+                                <li key="07037" ><a href=""><img src='img/fons/07037_li.jpg'/><h3>Es Mercadal</h3></a></li>
+                                <li key="07052" ><a href=""><img src='img/fons/07052_li.jpg'/><h3>Sant Llu&iacute;s</h3></a></li>
+                                <li key="07064" ><a href=""><img src='img/fons/07064_li.jpg'/><h3>Es Castell</h3></a></li>
+                                <li key="07902" ><a href=""><img src='img/fons/07067_li.jpg'/><h3>Es Migjorn Gran</h3></a></li>
+                                <li key="07070" ><a href=""><img src='img/fons/07070_li.jpg'/><h3>Consell Insular</h3></a></li>
+                            </ul>
+                       </div>
+                    <!--<a href=""  data-role="button" data-theme="b" id="btnAcceptarMunicipi">Aceptar</a>-->
+                </div>  
+            </div><!-- /content -->
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" id="tabIdioma3a" data-icon="gear" data-rel="dialog" data-iconpos="top" href="#pageIdioma" data-rel="dialog" data-transition="fade">Idioma</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" id="tabExit3a"  data-icon="back" data-iconpos="top">Sortir</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>        
+
+
+        <!-- 0. p&agrave;gina Inici -->
+        <div id="home" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+                <a href="#pageMainMunicipi" data-role="button" data-icon="home"><div id="home_lblInici">Inici</div></a>
+                <h1><div id="home_lblTitol">Smart Menorca</div></h1>
+                <!--<a href="#credits" class="ui-btn-right" data-icon="info" data-iconpos="notext" data-rel="dialog" data-transition="fade">Cr&egrave;dits</a>-->
+            </div>
+            <div data-role="content" role="main" style="padding: 0px;">
+                <div id="canvas" style="background-color: #eeeeee;z-index: -9999;position: absolute;">
+                    aa
+                </div>
+                <div id="cap">
+                	<img id="imgLogo" src='img/logo.png'>
+                	<div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;" id="lbl_home_0">Benvingut a Ma&oacute;. Aquest &eacute;s el men&uacute; principal:</div>
+                </div>
+                <div style="padding:0px;">
+                	<div style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;"></div>
+                	<center>
+                    	<div data-role="controlgroup" style="padding:5px; ">
+                            <ul id="llistaMenuPral" data-role="listview" data-theme="c">
+                            </ul>
+                       </div>
+		       </center>         
+		</div>
+                
+            </div>
+        </div>
+
+        <!-- 1. p&agrave;gina principal MAPA-->
+        <div id="mainContainer" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Map_lblInici">Inici</div></a>
+                <h1><div id="Map_lblTitol">Mapa</div></h1>
+            </div>
+            <div data-role="content" role="main" data-theme="b">
+                <div id="mapa"></div>
+            </div>
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top"><div id="Map_lblCapes">Capes</div></a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#" data-icon="user-pos" data-iconpos="top" onClick="centerMe()"><div id="Map_lblOnSoc">On soc?</div></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Debug en dispositius m&ograve;bils: No eliminar -->
+        <div style="display:none; position: absolute; top: 170px; left: 10px; z-index: 9999999;" onclick="javascript: deb();">
+            aaaa
+        </div>
+        <div style="display:none; position: absolute; top: 200px; left: 10px; z-index: 9999999; border:1px solid blue;" id="debres"></div>
+
+        <!-- 2. página BUSCADOR TOPÒNIMS -->
+        <div id="buscador" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+
+            <div data-role="content">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#searchpageCarrers1">Adreces</a>
+                        </li>
+                        <!--
+                        <li>
+                            <a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <p></p>
+                <ul id="autocomplete_topo" data-role="listview" data-filter-theme="d" data-filter-placeholder="Introdueix un top&ograve;nim a buscar..." data-filter="true" data-inset="true"></ul>
+            </div>
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- 2. página BUSCADOR TURISTIC -->
+        <div id="searchpageOferta" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#mainContainer" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+
+            <div data-role="content">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#searchpageCarrers1">Adreces</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#searchpageOferta">Medi ambient</a>
+                        </li>
+                    </ul>
+                </div>
+                <p></p>
+                <ul id="autocomplete_oferta" data-role="listview" data-filter-theme="d" data-filter-placeholder="Introdueix l'oferta que vulgui buscar..." data-filter="true" data-inset="true"></ul>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ############################################################## -->
+        <!--
+        PÀGINA: CARRERS - Llista Municipis
+        -->
+        <div data-role="page" id="searchpageCarrers1" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#mainContainer" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+
+            <div data-role="content" data-theme="c">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#searchpageCarrers1">Adreces</a>
+                        </li>
+                        <!--<li><a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a></li>-->
+                    </ul>
+                </div>
+                <div data-role="controlgroup">
+                    <p>
+                        Escull un municipi:
+                    </p>
+
+                    <ul id="llistaMunicipis" data-role="listview">
+                        <li key="002" >
+                            Alaior
+                        </li>
+                        <li key="023" >
+                            Ferreries
+                        </li>
+                        <li key="015" >
+                            Ciutadella
+                        </li>
+                        <li key="032" >
+                            Ma&oacute;
+                        </li>
+                        <li key="037" >
+                            Es Mercadal
+                        </li>
+                        <li key="052" >
+                            Sant Llu&iacute;s
+                        </li>
+                        <li key="064" >
+                            Es Castell
+                        </li>
+                        <li key="902" >
+                            Es Migjorn Gran
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+            <div data-role="navbar">
+            <ul>
+            <li><a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a></li>
+            <li><a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a></li>
+            <li><a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a></li>
+            </ul>
+            </div>
+            </div>
+            -->
+
+        </div>
+
+        <!--
+        PÀGINA: CARRERS - Llista Nuclis
+        -->
+        <div data-role="page" id="searchpageCarrers2" data-theme="c">
+            <!--Header-->
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+            <!--fieldcontain-->
+            <div data-role="content" data-theme="c">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#searchpageCarrers2">Adreces</a>
+                        </li>
+                        <!--<li><a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a></li>-->
+                    </ul>
+                </div>
+                <a href="#searchpageCarrers1" id="btMunicipi1" data-role="button" style="visibility:hidden;">Municipi:</a>
+
+                <div data-role="controlgroup">
+                    <p>
+                        Escull un nucli:
+                    </p>
+                    <ul id="llistaNuclis" data-role="listview">
+                        <li>
+                            Carregant...
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+            <div data-role="navbar">
+            <ul>
+            <li><a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a></li>
+            <li><a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a></li>
+            <li><a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a></li>
+            </ul>
+            </div>
+            </div>
+            -->
+        </div>
+
+        <!--
+        PÀGINA: CARRERS - Llista Carrers
+        -->
+        <div data-role="page" id="searchpageCarrers3" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+            <!--fieldcontain-->
+            <div data-role="content" data-theme="c">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#searchpageCarrers2">Adreces</a>
+                        </li>
+                        <!--
+                        <li>
+                            <a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <!--<a href="#searchpageCarrers1" id="btMunicipi2" data-role="button">Top&ograve;nims</a>-->
+                <a href="#searchpageCarrers2" id="btNucli1" data-role="button">Nucli</a>
+
+                <div data-role="controlgroup">
+                    <p>
+                        Escull un carrer:
+                    </p>
+                    <ul id="llistaCarrers" data-role="listview"></ul>
+                </div>
+            </div>
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+            <div data-role="navbar">
+            <ul>
+            <li><a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a></li>
+            <li><a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a></li>
+            <li><a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a></li>
+            </ul>
+            </div>
+            </div>
+            -->
+        </div>
+
+        <!--
+        PÀGINA: CARRERS - Llista Portals
+        -->
+        <div data-role="page" id="searchpageCarrers4" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+            <!--fieldcontain-->
+            <div data-role="content" data-theme="c">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#searchpageCarrers1">Adreces</a>
+                        </li>
+                        <!--<li><a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a></li>-->
+                    </ul>
+                </div>
+                <a href="#searchpageCarrers1" id="btMunicipi3" data-role="button" style="visibility:hidden;">Municipi</a>
+                <a href="#searchpageCarrers2" id="btNucli2" data-role="button">Nucli</a>
+                <a href="#searchpageCarrers3" id="btCarrer1" data-role="button">Carrer</a>
+
+                <div data-role="controlgroup">
+                    <p>
+                        Escull un portal:
+                    </p>
+                    <ul id="llistaPortals" data-role="listview"></ul>
+                </div>
+            </div>
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+            <div data-role="navbar">
+            <ul>
+            <li><a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a></li>
+            <li><a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a></li>
+            <li><a class="footerMenuItem ui-btn-active" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a></li>
+            </ul>
+            </div>
+            </div>
+            -->
+        </div>
+        <!-- ############################################################### -->
+
+        <!-- 2.1. página BUSCADOR CARRERS -->
+        <div id="buscador_adreces" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#mainContainer" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+
+            <div data-role="content">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador">Top&ograve;nims</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active ui-state-persist" href="#buscador_adreces">Adreces</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#searchpageOferta">Medi ambient</a>
+                        </li>
+                    </ul>
+                </div>
+                <label for="buscadorAdrMunicipi" class="select">Escull un municipi:</label>
+                <div  data-role="controlgroup" data-type="horizontal">
+
+                    <select name="buscadorAdrMunicipi" id="buscadorAdrMunicipi" data-native-menu="false">
+                        <option value="">Carregant...</option>
+                    </select>
+                    <input type="button" value="Centrar" data-inline="true"/>
+                </div>
+                <label for="buscadorAdrNucli" class="select">Escull un nucli:</label>
+                <select name="buscadorAdrNucli" id="buscadorAdrNucli" data-native-menu="false"></select>
+
+                <label for="buscadorAdrCarrer" class="select">Escull un carrer:</label>
+                <select name="buscadorAdrCarrer" id="buscadorAdrCarrer" data-native-menu="false"></select>
+
+                <label for="buscadorAdrPortal" class="select">Escull un portal:</label>
+                <select name="buscadorAdrPortal" id="buscadorAdrPortal" data-native-menu="false"></select>
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- 3. p&agrave;gina CAPES -->
+        <div id="capes" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#mainContainer" data-role="button" data-icon="arrow-l"><div id="capes_lblInici">Torna</div></a>
+                <h1><div id="capes_lblTitol">Capes</div></h1>
+                <a href="#mainContainer" data-role="button" data-icon="arrow-r"><div id="capes_lblAplica">Aplica</div></a>
+            </div>
+
+            <div data-role="content">
+                <form>
+                    <fieldset data-role="controlgroup">
+                        <legend>
+                            Capes Base
+                        </legend>
+                        <input type="radio" name="layersradio" class="layersradio" id="radio-choice-4745" value="597" checked="checked" onClick="layerChanged('597', this)"/>
+                        <label for="radio-choice-4745" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_basereferencia">
+                                &nbsp;
+                            </div>Base Refer&egrave;ncia</label>
+                        <input type="radio" name="layersradio" class="layersradio" id="radio-choice-4746" value="604" onClick="layerChanged('604', this)"/>
+                        <label for="radio-choice-4746" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_basereferencia">
+                                &nbsp;
+                            </div>Orto 1956 CIME</label>
+                        <input type="radio" name="layersradio" class="layersradio" id="radio-choice-4747" value="603" onClick="layerChanged('603', this)"/>
+                        <label for="radio-choice-4747" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_basereferencia">
+                                &nbsp;
+                            </div>Orto 1989 CIME</label>
+                        <input type="radio" name="layersradio" class="layersradio" id="radio-choice-4748" value="598" onClick="layerChanged('598', this)"/>
+                        <label for="radio-choice-4748" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_basereferencia">
+                                &nbsp;
+                            </div>Orto 2010 CIME</label>
+                        <input type="radio" name="layersradio" class="layersradio" id="radio-choice-4749" value="643" onClick="layerChanged('643', this)"/>
+                        <label for="radio-choice-4749" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_basereferencia">
+                                &nbsp;
+                            </div>Orto 2012 CIME</label>
+                        <input type="hidden" id="radio-choice-4742" value="597"/>
+                    </fieldset>
+
+                    <fieldset data-role="controlgroup">
+                        <legend>
+                            Capes Tem&agrave;tiques
+                        </legend>
+                        <input type="checkbox" name="layerscheckbox" class="layerscheckbox" id="checkbox-choice-4754" value="187" onClick="layerChanged('187', this)"/>
+                        <label for="checkbox-choice-4754" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_fars">
+                                &nbsp;
+                            </div>Fars i torres</label>
+                    </fieldset>
+
+                    <fieldset data-role="controlgroup">
+                        <legend>
+                            Altres Capes
+                        </legend>
+                        <input type="checkbox" name="layerscheckbox" class="layerscheckbox" id="checkbox-choice-4759" value="46" onClick="layerChanged('46', this)"/>
+                        <label for="checkbox-choice-4759" data-iconpos="right">
+                            <div class="treeCartoItemImg treeCartoItemImg_camicavalls">
+                                &nbsp;
+                            </div>Cam&iacute; de cavalls</label>
+                    </fieldset>
+                </form>
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false" data-theme="b">
+            <div data-role="navbar">
+            <ul>
+            <li><a class="footerMenuItem" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a></li>
+            <li><a class="footerMenuItem ui-btn-active" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a></li>
+            <li><a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a></li>
+            </ul>
+            </div>
+            </div>
+            -->
+
+        </div>
+
+        <!-- 4. p&agrave;gina Informaci&oacute;: llista de tipus -->
+        <div id="infoList" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#pageTurisme1" data-role="button" data-icon="arrow-l" ><div id="InfoList_lblInici">Men&uacute;</div></a>
+                <h1><div id="InfoList_lblTitol">Informaci&oacute; municipal</div></h1>
+            </div>
+            
+      
+            
+            <div data-role="content" data-theme="c" style="padding:0px;">
+                <img id="imgLogoTur5" src='img/logoTur.jpg' style="max-width:100%;">
+                <center><div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;" id="lbl_InfoList1" >Informaci&oacute; tur&iacute;stica</div></center>
+            
+            	<div style="padding:10px;">
+	                <label for="slider-fill"><div id="lblSlider">Cercar informaci&oacute; en un radi de (metres):</div></label>
+	                <input type="range" name="slider-fill" id="infoListDistance" value="0" min="0" max="10000" data-highlight="true" step="100" data-theme="b"/>
+                	<div id="lbl_InfoList2">Sobre:</div>
+	                <!-- Div que s'omple amb els botons de tipus segons consulta d'admin. -->
+	                <div id="infoListButtons"></div>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false data-theme="b"">
+                <div data-role="navbar" data-theme="b">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- 4.1. p&agrave;gina Informaci&oacute;: candidats del tipus -->
+        <div id="infoCand" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a href="#infoList" data-role="button" data-icon="arrow-l"><div id="InfoCand_lblInici">Men&uacute;</div></a>
+                <h1><div id="InfoCand_lblTitol">Informaci&oacute; municipal</div></h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul id="infoCandListview" data-role="listview">
+                        <li data-role="list-divider" role="heading">
+                            <div id="InfoCad_lblResultats">Resultats</div>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#pois_vistaDetallada">Pampal&ograve;nia
+                            <br />
+                            <span>Descripci&oacute;...</span></a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#pois_vistaDetallada">Socarrell bord
+                            <br />
+                            <span>Descripci&oacute;...</span></a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#pois_vistaDetallada">Socarrell gros
+                            <br />
+                            <span>Descripci&oacute;...</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- 4.2. p&agrave;gina Informaci&oacute;: Fitxa de informaci&oacute; per pois -->
+        <div id="infoFitxaPOI" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a data-rel="back" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Informaci&oacute;</h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul data-role="listview">
+                        <li id="infoFitxaPOIHeader" data-role="list-divider" role="heading">
+                            TITOL
+                        </li>
+                        <li>
+                            <p class="fitxa_nom" style="display:none">
+                                <b>Nom:</b>
+                                <span id="infoFitxaPOINombre">Nom</span>
+                            </p>
+                            <div class="fitxa_img">
+                                <img id="infoFitxaPOIImg" alt="" src="img/noimage.png" />
+                            </div>
+                            <div>
+                                <a id="infoFitxaPOIMarker" data-role="button" data-iconpos="left" data-icon="mapa" data-mini="true" data-inline="true" class="fitxa_mapa">Mostrar al mapa</a>
+                            </div>
+                            <p class="fitxa_desc">
+                                <b>Descripci&oacute;:</b>
+                                <span id="infoFitxaPOIDesc"></span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- 4.2. p&agrave;gina Informaci&oacute;: Image gallery -->
+        <div id="infoFitxaImatges" data-role="page" class="gallery-page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a id="infoFitxaImatgesLink" data-rel="back" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Informaci&oacute;</h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul id="gallery" class="gallery"></ul>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <div id="infoFitxaRUTA" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a data-rel="back" data-role="button" data-icon="arrow-l"><div id="lblFitxaRuta0">Torna</div></a>
+                <h1><div id="titolFitxaRuta">Informaci&oacute;</div></h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul data-role="listview">
+                        <li id="infoFitxaRUTAHeader" data-role="list-divider" role="heading">
+                            TITOL
+                        </li>
+                        <li>
+                            <p class="fitxa_nom" style="display:none">
+                                <b>Nom:</b>
+                                <span id="infoFitxaRUTANombre"></span>
+                            </p>
+                            <p class="fitxa_nom">
+                                <b><div id="lblFitxaRuta1">Dist&agrave;ncia:</div></b>
+                                <span id="infoFitxaRUTADistancia"></span>
+                            </p>
+                            <p class="fitxa_nom">
+                                <b><div id="lblFitxaRuta2">Temps:</div></b>
+                                <span id="infoFitxaRUTATiempo"></span>
+                            </p>
+                            <p class="fitxa_nom">
+                                <b><div id="lblFitxaRuta3">Desnivell acum. positiu:</div></b>
+                                <span id="infoFitxaRUTADesnivel"></span>
+                            </p>
+                            <p class="fitxa_nom">
+                                <b><div id="lblFitxaRuta4">Dificultat:</div></b>
+                                <span id="infoFitxaRUTADificultad"></span>
+                            </p>
+                            <p class="fitxa_nom">
+                                <b><div id="lblFitxaRuta5">Trets d'inter&egrave;s:</div></b>
+                                <span id="infoFitxaRUTAInteres"></span>
+                            </p>
+                            <div class="fitxa_img">
+                                <img id="infoFitxaRUTAImg" alt="" src="img/noimage.png" />
+                            </div>
+                            <div>
+                                <a id="infoFitxaRUTAToHabitats" data-role="button" data-iconpos="left" data-icon="habitats" data-mini="true" data-inline="true" class="fitxa_mapa">H&agrave;bitats</a>
+                            </div>
+                            <div>
+                                <a id="infoFitxaRUTAToEspecies" data-role="button" data-iconpos="left" data-icon="especies" data-mini="true" data-inline="true" class="fitxa_mapa">Esp&egrave;cies</a>
+                            </div>
+                            <div>
+                                <a id="infoFitxaRUTAMarker" data-role="button" data-iconpos="left" data-icon="mapa" data-mini="true" data-inline="true" class="fitxa_mapa">Mostrar al mapa</a>
+                            </div>
+                            <p class="fitxa_desc">
+                                <b><div id="lblFitxaRuta6">Descripci&oacute;:</div></b>
+                                <span id="infoFitxaRUTADesc" style="text-align:justify;"></span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+        
+        
+        <div id="infoFitxaRUTAHabitats" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a data-rel="back" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Informaci&oacute;</h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul id="GFICandidatsHabitats" data-role="listview" data-divider-theme="b" />
+                </div>
+            </div>
+            
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+        
+        <div id="infoFitxaRUTAEspecies" data-role="page" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a data-rel="back" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Informaci&oacute;</h1>
+            </div>
+
+            <div data-role="content">
+                <div class="center-div">
+                    <ul id="GFICandidatsEspecies" data-role="listview" data-divider-theme="b" />
+                </div>
+            </div>
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+        
+        <!-- INFO -->
+        <div data-role="page" id="dialog-info" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false" data-theme="b">
+                <a data-rel="back" data-role="button" data-icon="arrow-l">Torna</a>
+                <h1>Cerca</h1>
+            </div>
+            <div data-role="content">
+                <div class="center-div">
+                    <ul id="GFICandidats" data-role="listview" data-divider-theme="b" />
+                </div>
+            </div>
+
+            
+            <!-- footer -->
+            <!--
+            <div data-role="footer" data-position="fixed" data-id="footerFixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li>
+                            <a class="footerMenuItem ui-btn-active" href="#infoList" data-icon="reneix-aprop" data-iconpos="top">Prop d'aqu&iacute;</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#capes" data-icon="reneix-capes" data-iconpos="top">Capes</a>
+                        </li>
+                        <li>
+                            <a class="footerMenuItem" href="#buscador" data-icon="reneix-cerca" data-iconpos="top">Cerca</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!--
+        PAGINA: INFO MUNICIPAL
+        -->
+        <div data-role="page" id="pageInfoMunicipal" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Info_lblInici">Men&uacute;</div></a>
+                <h1><div id="InfoMunicipal_lblTitol">Informaci&oacute; municipal</div></h1>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capInfoMunicipal" >
+                </div>
+                
+                <div id="contentMunicipi" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;"><br>&nbsp;Carregant dades. Per favor, esperi...</div>
+                <div style="padding:10px;">
+                    <center>
+                        <div data-role="controlgroup" style="padding:10px;">
+                            <ul id="llistaInfoMunicipi" data-role="listview" data-theme="c" ></ul>
+                        </div>
+                    </center>
+
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <!--
+        PAGINA: INFO MUNICIPAL DETALL
+        -->
+        <div data-role="page" id="pageInfoMunicipalDetall" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageInfoMunicipal" data-role="button" data-icon="arrow-l"><div id="InfoDetall_lblBack">Enrere</div></a>
+                <h1><div id="InfoMunicipalDetall_lblTitol">Informaci&oacute; municipal</div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="InfoDetall_lblMenu">Men&uacute;</div></a>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capInfoMunicipalDetall" >
+                </div>            
+                <div style="padding:10px;">
+	                <center>
+	                    <div id="detallMunicipal">
+	                        Carregant dades. Per favor, esperi...
+	                    </div>
+	                </center>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        PAGINA: AGENDA CULTURAL
+        -->
+        <div data-role="page" id="pageAgendaCultural" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Agenda_lblInici">Men&uacte;</div></a>
+                <h1><div id="Agenda_lblTitol">Agenda Cultural</div></h1>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capAgenda" >
+                </div>
+            
+                <div id="contentAgenda" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;"><br>&nbsp;Carregant dades. Per favor, esperi...</div>
+                <br>
+                <div style="padding:0px;">
+                    <center>
+                        <div data-role="controlgroup" style="padding:0px;">
+                            <ul id="llistaAgenda" data-role="listview" data-theme="c" ></ul>
+                        </div>
+                    </center>
+
+                </div>
+            </div>
+        </div>
+
+        <!--
+        PAGINA: NOT&oacute;CIES
+        -->
+        <div data-role="page" id="pageNoticies" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Noticies_lblInici">Enrere</div></a>
+                <h1><div id="Noticies_lblTitol">Not&iacute;cies</div></h1>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capNoticies" >
+                </div>            
+                <div id="contentNoticies" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;"><br>&nbsp;Carregant dades. Per favor, esperi...</div>
+                <br>
+                <div style="padding:0px;">
+                    <center>
+                        <div data-role="controlgroup" style="padding:0px;">
+                            <ul id="llistaNoticies" data-role="listview" data-theme="c" ></ul>
+                        </div>
+                    </center>
+
+                </div>
+            </div>
+        </div>
+        
+        <!--
+        PAGINA: PUBLICACIO
+        -->
+        <div data-role="page" id="pagePublicacio" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-rel="back" data-icon="arrow-l"><div id="Publicacio_lblBack">Enrere</div></a>
+                <h1><div id="tipusPub"></div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="Publicacio_lblMenu">Men&uacute;</div></a>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capPublicacio" >
+                </div>              
+                <div id="contentPublicacio" style="padding:10px;"></div>
+            </div>
+        </div>  
+        
+        
+		<!--
+        PAGINA: COMER&ccdeil;OS
+        -->
+        <div data-role="page" id="pageComer" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="comer_lblInici">Enrere</div></a>
+                <h1><div id="titolPageComer">Guia de Comer&ccedil;os</div></h1>
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capComer" >
+                </div>            
+                <div id="contentComer" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;"><br>&nbsp;Carregant dades. Per favor, esperi...</div>
+                <br>
+                            
+                <div style="padding:10px;">
+                    <center>
+                        <div data-role="controlgroup" >
+                            <ul id="llistaComer" data-role="listview" data-theme="c" data-filter="true"></ul>
+                        </div>
+                    </center>
+
+                </div>
+            </div>
+        </div>
+        
+		<!--
+        PAGINA: COMER&CCEDIL;OS DETALL
+        -->
+        <div data-role="page" id="pageComerDetall" data-theme="c">
+
+            <div data-role="header" data-position="fixed" data-theme="b" style="padding:0px;">
+                <a href="#" data-rel="back" data-role="button" data-icon="arrow-l"><div id="comerDet_lblInici">Enrere</div></a>
+                <h1><div id="titolPageComer2">Detall Comer&ccedil;</div></h1>
+				<a href="#home" data-role="button" data-icon="home"><div id="comerDet_lblMenu">Men&uacute;</div></a>
+                <div id="capComerDetall" >
+                </div>                  
+                <div data-role="navbar" data-theme="c">
+                    <ul>
+                        <li><a class="footerMenuItem" id="tabMapa1" >Mapa</a></li>
+                        <li><a class="footerMenuItem" id="tabMapa2" >Sat&eacute;lite</a></li>
+                    </ul>
+                </div>                
+            </div>
+
+            <div data-role="content" style="padding:0px;" data-theme="c">
+            
+                <center>
+                    <div id="mapCanvas" style="width:600px; height:500px;background-color: white;"></div>
+                </center>            	
+                <div id="contentComerDetall" style="padding:10px;">Carregant dades. Per favor, esperi...</div>
+            </div>
+        </div>        
+          
+
+        <!--
+        DIALEG Noticia
+        -->
+        <div id="dialegNoticia" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageNoticies" data-role="button" data-icon="arrow-l">Enrere</a>
+                <h1>Noticia</h1>
+            </div>
+            <div data-role="content" data-theme="c">
+                <div id="Titol" style="font-weight:bold;"></div>
+                <div id="pubDate" style="font-size:12px;"></div>
+                <hr>
+                <div id="Noticia" style="text-align:justify;"></div>
+            </div><!-- /content -->
+        </div>
+
+        <!--
+        DIALEG Agenda
+        -->
+        <div id="dialegAgenda" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageAgendaCultural" data-role="button" data-icon="back">Agenda</a>
+                <h1>Agenda</h1>
+            </div>
+            <div data-role="content" data-theme="c">
+                <div id="A-Titol" style="font-weight:bold;"></div>
+                <div id="A-pubDate" style="font-size:12px;"></div>
+                <hr>
+                <div id="A-Noticia" style="text-align:justify;"></div>
+            </div><!-- /content -->
+        </div>
+
+        <!--
+            PAGE IDIOMA
+        -->
+        <div id="pageIdioma" data-role="page" data-theme="c">
+            <div data-role="header"data-theme="b">
+                <h1>Idioma</h1>
+            </div>
+            <div data-role="content" data-theme="c">
+
+                    	<div data-role="controlgroup" style="padding:5px;">
+                            <ul id="llistaIdioma" data-role="listview" data-theme="c">
+                                <li key="cat" onclick="doIdioma('cat')"><a href=""><img src='img/lang_cat.png' style="height:35px;top:22px;left:15px;"/><div style="position:absolute;top:30px;">Catal&agrave;</div></a></li>
+                                <li key="cas" onclick="doIdioma('cas')"><a href=""><img src='img/lang_esp.png' style="height:35px;top:22px;left:15px;"/><div style="position:absolute;top:30px;">Castellano</div></a></li>
+				<!--<li key="ang" onclick="doIdioma('ang')"><a href=""><img src='img/lang_ing.png' style="height:35px;top:22px;left:15px;"/><div style="position:absolute;top:30px;">English</div></a></li>-->
+                            </ul>
+                    	</div>    
+                <!--            
+                	<fieldset data-role="controlgroup" >
+                    <legend>
+                        Selecciona un idioma:
+                    </legend>
+                    <input type="radio" name="radio-idioma" id="radio-idioma-cat" value="cat" checked="checked" />
+                    <label for="radio-idioma-cat">Catal&agrave;</label>
+
+                    <input type="radio" name="radio-idioma" id="radio-idioma-cas" value="cas"  />
+                    <label for="radio-idioma-cas">Castellano</label>
+
+                    <input type="radio" name="radio-idioma" id="radio-idioma-ang" value="ang"  />
+                    <label for="radio-idioma-ang">English</label>
+                </fieldset>
+                <p>
+                    &nbsp;
+                </p>
+                <a href="#"  data-role="button" data-theme="b" id="btnAcceptarIdioma">Aceptar</a>
+                -->
+
+            </div><!-- /content -->
+        </div>
+
+        <!--
+            PAGE MUNICIPI
+        -->
+        <div id="pageMunicipi" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <h1>Municipi</h1>
+            </div>
+            <div data-role="content">
+                <fieldset data-role="controlgroup" >
+
+                        <legend><div id="lblMunicipi">Pots seleccionar informaci&oacute; d&apos;un dels d&apos;aquests municipis:</div></legend>
+                        
+                        <input type="radio" name="radio-municipi" id="radio-07002" value="07002" checked="checked" />
+                        <label for="radio-07002">Alaior</label>
+                 
+                        <input type="radio" name="radio-municipi" id="radio-07015" value="07015"  />
+                        <label for="radio-07015">Ciutadella</label>
+                 
+                        <input type="radio" name="radio-municipi" id="radio-07023" value="07023"  />
+                        <label for="radio-07023">Ferreries</label>
+        
+                        <input type="radio" name="radio-municipi" id="radio-07032" value="07032"  />
+                        <label for="radio-07032">Ma&oacute;</label>
+        
+                        <input type="radio" name="radio-municipi" id="radio-07037" value="07037"  />
+                        <label for="radio-07037">Es Mercadal</label>
+        
+                        <input type="radio" name="radio-municipi" id="radio-07052" value="07052"  />
+                        <label for="radio-07052">Sant Llu&iacute;s</label>
+        
+                        <input type="radio" name="radio-municipi" id="radio-07064" value="07064"  />
+                        <label for="radio-07064">Es Castell</label>
+        
+                        <input type="radio" name="radio-municipi" id="radio-07067" value="07067"  />
+                        <label for="radio-07067">Es Migjorn Gran</label>
+        
+                </fieldset>   
+                <hr>
+                <a href=""  data-role="button" data-theme="b" id="btnAcceptarMunicipi">Aceptar</a>  
+            </div><!-- /content -->
+        </div>
+
+        
+        <!--
+            DIALEG Error
+        -->    
+        <div data-role="dialog" id="dialegError" data-theme="c">
+            <div data-role="header" data-theme="b">
+                <h1><div id="titolError">S'ha produit un error</div></h1>
+            </div>
+            <div data-role="content"> 
+                <center><img src="img/alert.png"></center>
+                <div id="txtError"></div>    
+                <a href=""  data-role="button" data-theme="b" id="btnQuitError">Aceptar</a>                         
+            </div>
+        </div>        
+        
+        
+        <!--
+            PAGINA: QUEIXES
+        -->        
+        <div data-role="page" id="pageQueixes" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Queixes_lblInici">Enrere</div></a>
+                <h1><div id="Queixes_lblTitol">Queixes</div></h1>
+            </div>
+        
+            <div data-role="content" style="padding: 0px;" data-theme="c"> 
+                <div id="capQueixa" >
+                </div>              
+                <div style="padding: 15px;">
+                
+                    <div id="Queixes_p1" style="text-shadow:5px 5px 10px black;">Omple el formulari i envia'ns la teva queixa:</div><p>
+                    <div id="landmark-1" data-landmark-id="1">
+
+                        <label for="Nom"><b><div id="Queixes_nom">Nom</div></b></label>
+                        <input type="text" id="Nom" name="Nom"> 
+                        
+                        <label for="NIF"><b>NIF:</b></label>
+                        <input type="text" id="NIF" name="NIF" value="">                         
+                                                
+                        <label for="Email"><b>Email:</b></label>
+                        <input type="email" id="Mail" name="Mail" value="">        
+                        
+                        <label for="IdArea" class="select" data-theme="b"><b><div id="Queixes_area">Area de l'ajuntament:</div></b></label>
+                        <select name="IdArea" id="IdArea">
+                        </select>                                                
+                            
+                        <label for="Texte"><b><div id="Queixes_comentari">Comentari:</div></b></label>
+                        <textarea id="Texte" name="Texte" cols="30" rows="10"></textarea>
+                            
+                        <label for="largeImage"><b><div id="Queixes_foto">Fotografia:</div></b></label><p></p>
+                        <center>
+							<img style="max-width:100%;" id="largeImage" src="" />
+
+                            <canvas id="canvas" style="display:none;"></canvas>
+                            <img id="canvasImg" style="max-width:100%;">
+
+                        </center>
+
+		               	<div id="lblPercent"></div>
+		                <button onclick="takePicture();" data-theme="b"><div id="Queixes_take">Fes una foto</div></button>
+		                <button onclick="selectPicture();" data-theme="b"><div id="Queixes_select">Selecciona una foto</div></button>
+		                <hr>
+		                <button data-theme="e" onclick="upload()"><div id="Queixes_send">Envia queixa</div></button>
+		                <span id="camera_status" style="width:100%;"></span>
+		                <textarea id="codi64" style="visibility: hidden;"></textarea>                        
+       
+                    </div>  
+				</div>                 
+            </div>
+        </div>         
+
+        <!--
+            PAGINA: HELP
+        -->        
+        <div data-role="page" id="pageHelp" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="home">Inici</a>
+                <h1>Ajuda</h1>
+            </div>
+        
+            <div data-role="content" style="padding:15px;"> 
+                    <div id="helpContent1">
+                        Per a poder mostrar els continguts en funci&oacute; de la teva posici&oacute;, cal habilitar les funcionalitats de geolocalitzaci&oacute; del teu dispositiu, que actualment estan inactives.<p>
+                        Per habilitar-les, segueix els segUents passos<br>
+                        <ul>
+                            <li>Anar a "Ajustes":<br><img src="img/help/help1.png" style="max-width:100%;"><br>&nbsp;</li>
+                            <li>Anar a "Ubicaci&oacute;n y seguridad":<br><img src="img/help/help2.png" style="max-width:100%;"><br>&nbsp;</li>
+                            <li>Marcar l'opci&oacute; "Utilizar redes":<br><img src="img/help/help3.png" style="max-width:100%;"><br>&nbsp;</li>
+                        </ul>
+                        </p>
+                        
+                    </div>
+            </div>
+        </div>         
+        
+        <!--
+            PAGINA: TRAMITS ELECTRONICS
+        -->        
+        <div data-role="page" id="pageTramits" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#home" data-role="button" data-icon="arrow-l"><div id="Tramits_lblInici">Enrere</div></a>
+                <h1><div id="Tramits_lblTitol">Tr&agrave;mits</div></h1>
+            </div>
+        
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capTramit" >
+                </div>      
+                
+                    <div id="tramitContent1" style="padding:10px;">
+                    	<center>
+                    		<div id="p_Tramits1" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Tria un dels serveis:</div>
+	                    	<a href="#pageTramits_Mat" id="btnHomeTramits_Mat" data-role="button" style="width:90%;" data-theme="b"><div id="lblBtnTram_1">Mat&egrave;ries</div></a>
+	                    	<a href="#pageTramits_Fets" id="btnHomeTramits_Fets" data-role="button" style="width:90%;" data-theme="b"><div id="lblBtnTram_2">Fets Vitals</div></a>
+	                    	<a href="#pageTramits_Dest" id="btnHomeTramits_Dest" data-role="button" style="width:90%;" data-theme="b"><div id="lblBtnTram_3">Destinataris</div></a>
+	                    	<hr>
+	                    	<a href="#" id="btnHomeTramits_Tots" data-role="button" style="width:90%;" data-theme="d">Tots</a>
+                    	</center>
+                    </div>
+            </div>
+        </div>           
+        
+        <!--
+            PAGINA: TRAMITS ELECTRONICS MATERIES
+        -->        
+        <div data-role="page" id="pageTramits_Mat" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageTramits" data-role="button" data-icon="arrow-l"><div id="TramitsMat_lblInici">Enrere</div></a>
+                <h1><div id="TramitsMat_lblTitol">Tr&agrave;mits </div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="TramitsMat_lblIMenu">Men&uacute;</div></a>
+            </div>
+            
+            <div data-role="content" style="padding:0px;" data-theme="c"> 
+                <div id="capTramit_Mat" >
+                </div>               
+	            <div id style="padding:15px;">               
+	                    <div id="tramitContent_Mat1">
+	                    	<center>
+	 							<div id="p_Tramits_Mat1" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Carregant dades...</div>
+		                        <div data-role="controlgroup" style="padding:10px;">
+		                            <ul id="llistaTramits_Mat_1" data-role="listview" data-theme="c" ></ul>
+		                        </div>	 							
+								
+	                    	</center>
+	
+	                    </div>
+	            </div>
+            </div>
+        </div>                
+
+        
+        <!--
+            PAGINA: TRAMITS FETS VITALS
+        -->        
+        <div data-role="page" id="pageTramits_Fets" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageTramits" data-role="button" data-icon="arrow-l"><div id="TramitsFets_lblInici">Enrere</div></a>
+                <h1><div id="TramitsFets_lblTitol">Tr&agrave;mits </div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="TramitsFets_lblMenu">Men&uacute;</div></a>
+            </div>
+            
+            <div data-role="content" style="padding:0px;" data-theme="c">
+                <div id="capTramit_Fets" >
+                </div>               
+	            <div id style="padding:15px;">               
+	                    <div id="tramitContent_Fets1">
+	                    	<center>
+	 							<div id="p_Tramits_Fets1" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Carregant dades...</div>
+		                        <div data-role="controlgroup" style="padding:10px;">
+		                            <ul id="llistaTramits_Fets_1" data-role="listview" data-theme="c" ></ul>
+		                        </div>	 							
+								
+	                    	</center>
+	
+	                    </div>
+	            </div>
+            </div>
+        </div>    
+
+        <!--
+            PAGINA: TRAMITS DESTINATARIS
+        -->        
+        <div data-role="page" id="pageTramits_Dest" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#pageTramits" data-role="button" data-icon="arrow-l"><div id="TramitsDest_lblInici">Enrere</div></a>
+                <h1><div id="TramitsDest_lblTitol">Tr&agrave;mits </div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="TramitsDest_lblMenu">Men&uacute;</div></a>
+            </div>
+            
+            <div data-role="content" style="padding:0px;" data-theme="c"> 
+                <div id="capTramit_Dest" >
+                </div>               
+	            <div id style="padding:15px;">               
+	                    <div id="tramitContent_Dest1">
+	                    	<center>
+	 							<div id="p_Tramits_Dest1" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Carregant dades...</div>
+		                        <div data-role="controlgroup" style="padding:10px;">
+		                            <ul id="llistaTramits_Dest_1" data-role="listview" data-theme="c" ></ul>
+		                        </div>	 							
+								
+	                    	</center>
+	
+	                    </div>
+	            </div>
+            </div>
+        </div>    
+
+        <!--
+            PAGINA: TRAMITS GESTIONS
+        -->        
+        <div data-role="page" id="pageTramits_Gestions" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-role="button" data-icon="arrow-l" data-rel="back"><div id="TramitsGest_lblInici">Enrere</div></a>
+                <h1><div id="TramitsGest_lblTitol">Tr&agrave;mits </div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="TramitsGest_lblMenu">Men&uacute;</div></a>
+            </div>
+            
+            <div data-role="content" style="padding:0px;" data-theme="c"> 
+                <div id="capTramit_Gestions" > 
+                </div>               
+	            <div id style="padding:15px;">               
+	                    <div id="tramitContent_Gestions1">
+	                    	<center>
+	 							<div id="p_Tramits_Gestions1" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Carregant dades...</div>
+		                        <div data-role="controlgroup" style="padding:10px;">
+		                            <ul id="llistaTramits_Gestions_1" data-role="listview" data-theme="c" data-filter="true"></ul>
+		                        </div>	 							
+								
+	                    	</center>
+	
+	                    </div>
+	            </div>
+            </div>
+        </div>    
+        <!--
+            PAGE TURISME1
+        -->
+        <div id="pageTurisme1" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageSplash" data-role="button" data-icon="arrow-l"><div id="tur1_lblInici">Inici</div></a>
+                <h1><div id="tur_lblTitol">Informaci&oacute; Tur&iacute;stica</div></h1>
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+                <img id="imgLogoTur" src='img/logoTur.jpg' style="max-width:100%;">
+                <center><div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;" id="lbl_Tur1" >Informaci&oacute; tur&iacute;stica</div></center>
+                <br>
+                <div style="padding:0px;">
+                    <!--<div id="lbl_Tur2" style="width:100%;text-align:center;padding:0px;color:#000000;text-shadow:5px 5px 10px #222222;">Selecciona una opci&oacute;<br>&nbsp;</div>-->
+                    	<center>
+                    	<div data-role="controlgroup" style="padding:0px;">
+                            <ul id="llistaTurisme" data-role="listview" data-theme="c">
+                                <li key="32" data-icon="false"><a href=""><img src='img/logoNatural_li.png'/><h3>Natural</h3></a></li>
+                                <li key="33" data-icon="false"><a href=""><img src='img/logoCultural_li.png'/><h3>Cultural</h3></a></li>
+				<li key="37" data-icon="false"><a href=""><img src='img/logoMedite_li.png'/><h3>Mediterranea</h3></a></li>                                
+				<li key="35" data-icon="false"><a href=""><img src='img/logoSlow_li.png'/><h3>Slow</h3></a></li>
+                            </ul>
+                            <!--
+                            <ul id="llistaTurismeAux" data-role="listview" data-theme="c">
+                                <li ><a href="#infoList"><img src='img/around.jpg'/><h3><div id="lbl_aprop1">Qu&egrave; tinc aprop?</div></h3></a></li>
+                            </ul>
+                            -->
+                            
+                    	</div>
+                    	</center>
+                    
+                    <!--<a href=""  data-role="button" data-theme="b" id="btnAcceptarMunicipi">Aceptar</a>-->
+                </div>  
+            </div><!-- /content -->
+            
+        </div>        
+
+        <!--
+        PAGINA: TURISME2
+        -->
+        <div id="pageTurisme2" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageTurisme1" data-role="button" data-icon="arrow-l"><div id="tur2_lblInici">Inici</div></a>
+                <h1><div id="tur2_lblTitol">Informaci&oacute; Tur&iacute;stica</div></h1>
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+                <img id="imgLogoTur2" src='img/logoTur.jpg' style="max-width:100%;">
+                <center><div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;" id="lbl_Tur3" >Informaci&oacute; tur&iacute;stica</div></center>
+                <div style="height:40px;width:100%"><center><img id="imgLogoTur2B" src='img/logoNatural.png' style="max-height:40px;"></center></div>
+                <br>
+                <div style="padding:0px;">
+		    <div data-role="controlgroup" style="padding:5px;">
+			<ul id="llistaTurisme2" data-role="listview" data-theme="c">
+			</ul>
+		    </div>
+                </div>  
+            </div>
+            
+        </div>  
+        
+        <!--
+        PAGINA: TURISME3
+        -->
+        <div id="pageTurisme3" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageTurisme2" data-role="button" data-icon="arrow-l"><div id="tur3_lblInici">Inici</div></a>
+                <h1><div id="tur3_lblTitol">Informaci&oacute; Tur&iacute;stica</div></h1>
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+            	<div id="ContentBtnMore" style="visibility:hidden;padding:5px;bottom:5px;width:100%">
+		    <center>
+            		<a href="#" data-role="button" data-theme="b" data-iconpos='left' data-icon='info' id="btnTurismeMore" style="width:90%;">
+            		<div id="lblBtnTurismeMore">Llegir m&eacute;s</div>
+            		</a>
+		    </center>
+            	</div>
+                <img id="imgLogoTur3" src='img/logoTur.jpg' style="max-width:100%;">
+                <center>
+		  <div style="padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;position:absolute;top:60px;right:20px;visibility:hidden;" id="lbl_Tur5" >Informaci&oacute; tur&iacute;stica</div>
+		</center>
+                <div style="height:40px;width:100%"><center><img id="imgLogoTur3B" src='img/logoNatural.png' style="max-height:40px;"></center></div>
+                
+                <div style="padding:5px;">
+                	<div id="titolTurisme" style="padding:5px; text-align:justify;text-shadow:5px 5px 10px black;font-weight:bold;">a</div>
+                	<!--<div id="imgTurisme" style="max-width:100%;">-->
+			  <center><img id="picTurisme" style="width:100%;"></center>
+			<!--</div>-->
+				<div id="contentTurisme" style="padding:5px; text-align:justify;">a</div>
+				<div style="padding:0px;" id="mapTur">
+		                <div data-role="navbar" data-theme="c">
+		                    <ul>
+		                        <li><a class="footerMenuItem ui-btn-active" id="tabMapa1a" >Mapa</a></li>
+		                        <li><a class="footerMenuItem" id="tabMapa2a" >Sat&eacute;lite</a></li>
+		                    </ul>
+		                </div>   
+				<div id="mapCanvasTur" style="width:600px; height:500px;background-color: white;"></div>
+				<div id="ContentBtnMore9"></div>
+                    </div> 		
+                    <p><br><p>&nbsp;</p><p>&nbsp;</p>
+                    <!--
+                    <div id="contentTurismeMore" style="padding:5px; text-align:justify;">
+						<a href="#" data-role="button"  id="btnTurismeMore2">
+							<div id="lblBtnTurismeMore">Llegir m&eacute;s</div>
+						</a>						                    
+                    </div>			
+					-->
+                </div>  
+                
+            </div>
+            
+        </div>    
+              
+
+        <!--
+        PAGINA: TURISME4
+        -->
+        <div id="pageTurisme4" data-role="page" data-theme="c">
+            <div data-role="header" data-position="fixed" data-id="headerFixed" data-tap-toggle="false"  data-theme="b">
+            	<a href="#pageTurisme2" data-role="button" data-icon="arrow-l"><div id="tur4_lblInici">Inici</div></a>
+                <h1><div id="tur4_lblTitol">Informaci&oacute; Tur&iacute;stica</div></h1>
+            </div>
+
+            <div data-role="content" style="padding: 0px;" data-theme="c">
+          	
+            	<div style="padding:5px;position:absolute;bottom:5px;width:100%">
+            		<center><a href="#" data-theme="b" data-role="button" data-iconpos='left' data-icon='info' id="btnTurismeMore2" style="width:90%;"><div id="lblBtnTurismeMore2">Llegir m&eacute;s</div></a></center>
+            	</div>            	
+            	
+                <img id="imgLogoTur4" src='img/logoTur.jpg' style="max-width:100%;">
+                <center>
+		  <div style="visibility:hidden;padding: 0px;color:#ffffff;text-shadow:5px 5px 10px black;top:60px;right:20px;" id="lbl_Tur6" >Informaci&oacute; tur&iacute;stica</div>
+		</center>
+                <div style="height:40px;width:100%"><center><img id="imgLogoTur4B" src='img/logoNatural.png' style="max-height:40px;"></center></div>
+                
+                <div style="padding:5px;">
+                	<div id="titolTurisme4" style="padding:5px; text-align:justify;text-shadow:5px 5px 10px black;font-weight:bold;">a</div>
+                	<!--<div id="imgTurisme4" style="max-width:100%;">-->
+			  <center><img id="picTurisme4" style="width:100%;"></center>
+			<!--</div>-->
+			<div id="contentTurisme4" style="padding:5px; text-align:justify;">a</div>
+
+                    	<div data-role="controlgroup" style="padding:5px;">
+                            <ul id="llistaTurisme4" data-role="listview" data-theme="c">
+                            </ul>
+                    	</div>
+                </div>  
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                
+                
+            </div>
+            
+        </div>                
+        
+        <!--
+            PAGINA: TRAMITS GESTIO
+        -->        
+        <div data-role="page" id="pageTramits_Gestio" data-theme="c"> 
+        
+            <div data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-role="button" data-icon="arrow-l" data-rel="back"><div id="Tramit_lblInici">Enrere</div></a>
+                <h1><div id="Tramit_lblTitol">Tr&agrave;mits </div></h1>
+                <a href="#home" data-role="button" data-icon="home"><div id="Tramit_lblMenu">Men&uacute;</div></a>
+            </div>
+            
+            <div data-role="content" style="padding:0px;" data-theme="c"> 
+                <div id="capTramit_Gestio" >
+                </div>              
+	            <div id style="padding:15px;">               
+	                    <div id="tramitContent_Gestio1" style="text-align:justify;">
+	 							<div id="gestio_Titulo_h"></div><div id="gestio_Titulo"></div>
+	 							
+	 							<a href="#" id="btnDoTramit" data-role="button" style="width:100%;" data-theme="d" onclick="fn_tramitar()">Tramitar</a>
+	 							
+	 							<div id="gestio_Objeto_h"><strong>Objecte del tr&agrave;mit:</strong></div><div id="gestio_Objeto"></div>
+	 							<div id="gestio_AmbitoResponsabilidad_h"><br><strong>&Agrave;mbit de resposabilitat:</strong></div><div id="gestio_AmbitoResponsabilidad"></div>
+	 							<div id="gestio_QuienPuedeSolicitar_h"><br><strong>Qui ho pot demanar:</strong></div><div id="gestio_QuienPuedeSolicitar"></div>
+	 							<div id="gestio_Requisitos_h"><br><strong>Requisits a complir:</strong></div><div id="gestio_Requisitos"></div>
+	 							<div id="gestio_Documentacion_h"><br><strong>Documentaci&oacute; a presentar:</strong></div><div id="gestio_Documentacion"></div>
+	 							<div id="gestio_TramitacionPresencial_h"><br><strong>On es pot realitzar el tr&agrave;mit:</strong></div>
+		 							<div id="gestio_TramitacionPresencial"></div>
+		 							<div id="gestio_Coreo"></div>
+		 							<div id="gestio_Fax"></div>
+		 							<div id="gestio_Mail"></div>
+		 							<div id="gestio_Otros"></div>
+		 							<div id="gestio_Web"></div>
+	 								<div id="gestio_Telefono"></div>
+	 							<div id="gestio_QuePreguntar_h"><br><strong>Qu&egrave; ha de demanar el ciutad&agrave:</strong></div><div id="gestio_QuePreguntar"></div>
+	 							<div id="gestio_PlazosCiudadanos_h"><br><strong>Terminis de ciutad&agrave:</strong></div><div id="gestio_PlazosCiudadanos"></div>
+	 							<div id="gestio_PlazosEntidad_h"><br><strong>Terminis de l'administraci&oacute;:</strong></div><div id="gestio_PlazosEntidad"></div>
+	 							<div id="gestio_Tarifas_h"><br><strong>Tarifes aplicables:</strong></div><div id="gestio_Tarifas"></div>
+	 							<div id="gestio_Respuesta_h"><br><strong>Resposta al ciutad&agrave;:</strong></div><div id="gestio_Respuesta"></div>
+	 							<div id="gestio_MarcoLegal_h"><br><strong>Marc Legal:</strong></div><div id="gestio_MarcoLegal"></div>
+	 							<div id="gestio_SilencioAdministrativo_h"><br><strong>Sentit del Silenci Administratiu:</strong></div><div id="gestio_SilencioAdministrativo"></div>
+	 							<div id="gestio_Observaciones_h"><br><strong>Observacions:</strong></div><div id="gestio_Observaciones"></div>
+	
+			                    <div data-role="controlgroup" style="padding:10px;" id="gestio_Documents">
+			                    	<br><strong>Documents:</srtong>
+		                            <ul id="llista_gestio_Documents" data-role="listview" data-theme="c" ></ul>
+		                        </div>	
+	
+	                    </div>
+	            </div>
+            </div>
+        </div>            
+
+
+
+
+  
+
+
+
+
+
+    </body>
+</html>
+
+
